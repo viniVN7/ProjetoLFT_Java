@@ -19,31 +19,48 @@ reserved = {
   'instanceof' : 'INSTANCEOF',
   'package' : 'PACKAGE',
   'public' : 'PUBLIC',
-  'private' : 'PRIVATE',
-  'protected' : 'PROTECTED',
   'static' : 'STATIC',
   'null' : 'NULL',
   'false' : 'FALSE',
   'true' : 'TRUE',
-  
 }
 
 #Definindo Tokens e seus padroes
-tokens = ["PLUS","MINUS","TIMES","DIVIDE", "LPAREM", "RPAREM", "ID", "NUMBER", "POT", "EQUAL_COMPARISON", "EQUAL", "LOGICAL_AND", "LOGICAL_OR", "LESS_OR_EQUAL", "DIFFERENT","GREATER_OR_EQUAL", "LESS_THAN", "GREATER_THAN",  "LBRACE", "RBRACE"]  + list(reserved.values()) 
+tokens = ["PLUS_PLUS","MINUS_MINUS", "PLUS_ASSIGNMENT", "MINUS_ASSIGNMENT", "TIMES_ASSIGNMENT", "DIVIDE_ASSIGNMENT", "MODULE_ASSIGNMENT", "AND_ASSIGNMENT", "EXCLUSIVE_OR_ASSIGNMENT", "INCLUSIVE_OR_ASSIGNMENT", "PLUS","MINUS","TIMES","DIVIDE", "MODULE", "LPAREM", "RPAREM", "ID", "NUMBER", "EQUAL", "ASSIGNMENT", "EXCLUSIVE_OR", "INCLUSIVE_OR", "LOGICAL_AND", "LOGICAL_OR", "AND", "NEGATION", "BOOLEAN_NEGATION", "LESS_OR_EQUAL", "DIFFERENT","GREATER_OR_EQUAL", "LESS_THAN", "GREATER_THAN", "LBRACE", "RBRACE", "COMMA", "SEMICOLON"]  + list(reserved.values()) 
 
 #adicionar operadores e (palavras reservadas _já_ok)
+t_PLUS_PLUS = r'\++'
+t_MINUS_MINUS = r'--'
+t_PLUS_ASSIGNMENT = r'\+='
+t_MINUS_ASSIGNMENT = r'-='
+t_TIMES_ASSIGNMENT = r'\*='
+t_DIVIDE_ASSIGNMENT = r'/='
+t_MODULE_ASSIGNMENT = r'%='
+t_AND_ASSIGNMENT = r'&='
+t_EXCLUSIVE_OR_ASSIGNMENT = r'\^='
+t_INCLUSIVE_OR_ASSIGNMENT = r'\|='
 
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*' 
 t_DIVIDE = r'/'
+t_MODULE = r'%'
+
 t_LPAREM = r'\('
 t_RPAREM = r'\)'
-t_POT = r'\^'
-t_EQUAL_COMPARISON = r'=='
-t_EQUAL = r'='
+
+t_EQUAL = r'=='
+t_ASSIGNMENT = r'='
+
 t_LOGICAL_AND = r'&&'
 t_LOGICAL_OR = r'\|\|'
+t_AND = r'&'
+t_EXCLUSIVE_OR = r'\^' 
+t_INCLUSIVE_OR = r'\|'
+
+t_NEGATION = r'~'
+t_BOOLEAN_NEGATION = r'!'
+
 t_LESS_OR_EQUAL = r'<='
 t_GREATER_OR_EQUAL = r'>='
 t_LESS_THAN = r'<'
@@ -52,19 +69,23 @@ t_DIFFERENT = r'!='
 
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
+
+t_COMMA = r','
+t_SEMICOLON = r';'
 #t_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
 
+#Definindo funções
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,"ID")
     return t
 
 
-#Definindo funções
 def t_NUMBER(t):
   r'\d+'
   t.value = int(t.value)
   return t
+
 
 def t_newline(t): # reconhece quebra de linha, tabulação e espaçõ em branco 
   r'\n+'
@@ -77,7 +98,6 @@ def t_error(t):
 
 #lexer = lex.lex()
 
-
 def t_STRING(t):
    r'\"([^\\\n]|(\\.))*?\"'
    return t
@@ -89,7 +109,8 @@ def t_ccode_comment(t):
 #Criando analisador Lexico e realizando analise lexica
 lexer = lex.lex()
 #lexer.input("\"\\n\"") #new
-lexer.input("&& || > <  >= <= != == =")
+#lexer.input("&& || > <  >= <= != == = % , ; ^ | ++")
+lexer.input("& && &= -- += -= %= /= *= ^= |= | || ~ !")
 #lexer.input("+-*-/ 5 } {=^++\t+\n+() num4 \"teste \\n teste\"  ") 
 for tok in lexer:
   print(tok.type, tok.value, tok.lineno, tok.lexpos) 
