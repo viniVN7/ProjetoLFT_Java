@@ -1,0 +1,86 @@
+# Observações: 
+  # MAIÚSCULO = TERMINAL    
+  # minúsculo = não terminal
+
+#### GLC  ####
+
+class -> visibility CLASS ID “{“ body_class “}”
+
+body_class -> attribute | 
+              method | 
+              attribute body_class | 
+              method body_class 
+
+attribute -> visibility ID ID “=” exp “;” | 
+             visibility  ID ID “;” |  
+             ID ID “=” exp “;” | 
+             ID ID “;”       
+
+constant_declaration -> visibility STATIC FINAL ID ID  “=” exp “;” | 
+                        FINAL ID ID  “=” exp “;” | 
+                        visibility FINAL ID ID  “=” exp “;” |
+                        STATIC FINAL ID ID  “=” exp “;”
+
+method -> signature body
+
+signature -> visibility ID ID  “(“ sigParams “)” | visibility ID ID  “(“ “)”
+
+sigParams -> ID ID | ID ID , sigParams
+
+visibility -> PUBLIC | PRIVATE | PROTECTED | PACKAGE 
+
+body -> “{“ stms “}” | “{“ “}”
+
+stms -> stm | stm stms
+
+stm -> exp “;” | WHILE “(” exp “)” body | 
+      FOR”(”opt_exp; opt_exp; opt_exp”)” body | 
+      RETURN exp”;” | x (definir outro nome)
+
+x -> x’ | x’’ 
+x’ -> IF “(” exp “)” x’ ELSE x’ | body
+x’’ -> IF “(” exp “)” x | IF “(” exp “)” x’ ELSE x’’
+
+
+opt_exp -> exp | 
+
+exp -> exp “+” exp | 
+exp “*” exp |
+exp “/”  exp | 
+exp “-”  exp | 
+exp ”<” exp |
+exp “>” exp |
+exp “+=” exp |
+exp “-=” exp |
+exp “/=” exp
+exp “*=” exp |
+exp “%=” exp | 
+exp “&=” exp |
+exp “^=” exp |
+exp “&” exp |
+exp “&&” exp |
+exp “^” exp |
+exp “|” exp |
+exp “||” exp |
+exp “|=” exp |
+exp “>=” exp |
+exp “=>” exp |
+exp “==” exp |
+exp “!=” exp |
+“~” exp |
+“!” exp |
+exp “++” |
+“++” exp |
+exp “--” |
+“--” exp |
+call | 
+assign |
+NUM |
+ID |
+STRING  
+
+call -> ID “(”params”)” | ID “(” “)”
+
+params -> exp “,” params | exp
+
+assign -> ID “=” exp
