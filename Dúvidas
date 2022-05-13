@@ -1,2 +1,0 @@
-class -> visibility CLASS ID “{“ body_class “}”
-Necessário adicionar o caso que não tenha nenhum corpo da classe? 

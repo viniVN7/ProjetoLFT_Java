@@ -4,83 +4,86 @@
 
 #### GLC  ####
 
-class -> visibility CLASS ID “{“ body_class “}”
+class → visibility CLASS ID “{“ body_class “}”
 
-body_class -> attribute | 
+body_class → attribute | 
               method | 
               attribute body_class | 
               method body_class 
 
-attribute -> visibility ID ID “=” exp “;” | 
-             visibility  ID ID “;” |  
-             ID ID “=” exp “;” | 
-             ID ID “;”       
+attribute → visibility type ID “=” exp “;” | 
+             visibility  type ID “;” |  
+             type ID “=” exp “;” | 
+             type ID “;”       
 
-constant_declaration -> visibility STATIC FINAL ID ID  “=” exp “;” | 
-                        FINAL ID ID  “=” exp “;” | 
-                        visibility FINAL ID ID  “=” exp “;” |
-                        STATIC FINAL ID ID  “=” exp “;”
+constant_declaration → visibility STATIC FINAL type ID  “=” exp “;” | 
+                        FINAL type ID  “=” exp “;” | 
+                        visibility FINAL type ID  “=” exp “;” |
+                        STATIC FINAL type ID  “=” exp “;”
 
-method -> signature body
+type → INT | ID | STRING
 
-signature -> visibility ID ID  “(“ sigParams “)” | visibility ID ID  “(“ “)”
+method → signature body
 
-sigParams -> ID ID | ID ID , sigParams
+signature → visibility ID ID  “(“ sigParams “)” | visibility ID ID  “(“ “)”
 
-visibility -> PUBLIC | PRIVATE | PROTECTED | PACKAGE 
+sigParams → type ID | type ID , sigParams
 
-body -> “{“ stms “}” | “{“ “}”
+visibility → PUBLIC  
 
-stms -> stm | stm stms
+body → “{“ stms “}” | “{“ “}”
 
-stm -> exp “;” | WHILE “(” exp “)” body | 
-      FOR”(”opt_exp; opt_exp; opt_exp”)” body | 
-      RETURN exp”;” | x (definir outro nome)
+stms → stm | stm stms
 
-x -> x’ | x’’ 
-x’ -> IF “(” exp “)” x’ ELSE x’ | body
-x’’ -> IF “(” exp “)” x | IF “(” exp “)” x’ ELSE x’’
+stm → stm1 | stm2
 
+stm1 → IF “(” exp “)” stm1 ELSE stm1 |
+        IF “(” exp “)” body ELSE stm1 |
+        IF “(” exp “)” stm1 ELSE body | 
+        IF “(” exp “)” body ELSE body | 
+        exp “;” | 
+        WHILE “(” exp “)” body |
+        WHILE  “(” exp “)” stm |
+        FOR ”(”opt_exp; opt_exp; opt_exp”)” body | 
+        FOR ”(”opt_exp; opt_exp; opt_exp”)” stm
+        RETURN exp”;”
 
-opt_exp -> exp | 
+stm2 → IF “(” exp “)” stm | 
+         IF “(” exp “)” stm1 ELSE stm2 | 
+         IF “(” exp “)” body ELSE stm2 |
+         IF “(” exp “)” body
 
-exp -> exp “+” exp | 
-exp “*” exp |
-exp “/”  exp | 
-exp “-”  exp | 
-exp ”<” exp |
-exp “>” exp |
-exp “+=” exp |
-exp “-=” exp |
-exp “/=” exp
-exp “*=” exp |
-exp “%=” exp | 
-exp “&=” exp |
-exp “^=” exp |
-exp “&” exp |
-exp “&&” exp |
-exp “^” exp |
-exp “|” exp |
-exp “||” exp |
-exp “|=” exp |
-exp “>=” exp |
-exp “=>” exp |
-exp “==” exp |
-exp “!=” exp |
-“~” exp |
-“!” exp |
-exp “++” |
-“++” exp |
-exp “--” |
-“--” exp |
-call | 
-assign |
-NUM |
-ID |
-STRING  
+opt_exp → exp | 
+
+exp → exp1 “=” exp | exp1 “+=” exp | exp1 “*=” exp | exp1 “/=” exp | exp1 “%=” exp | 
+ exp1 “&=” exp | exp1 “^=” exp | exp1 “|=” exp | exp1
+
+exp1 → exp1 “||” exp2 | exp2
+
+exp2 → exp2 “&&” exp3 | exp3
+
+exp3 → exp3 “|” exp4 | exp4
+
+exp4 → exp4 “^” exp5 | exp5
+
+exp5 → exp5 “&” exp6 | exp6
+
+exp6 → exp6 “==” exp7 | exp6 “!=” exp7 | exp7
+
+exp7 → exp7 “<” exp8 | exp7 “>” exp8 | exp7 “<=” exp8 | exp7 “>=” exp8 | exp8
+
+exp8 → exp8 “+” exp9 | exp8 “-” exp9 | exp9
+
+exp9 → exp9 “*” exp10 | exp9 “/” exp10 | exp9 “%” exp10 | exp10
+
+exp 10 → “++”exp11 | “--”exp11 | “+”exp11  “-”exp11 |  “!”exp11 |  “~”exp11 | exp11
+
+exp11 → exp12“++” | exp12“--” | exp12
+
+exp12 → call | NUM | ID | STRING | “(” exp “)” 
 
 call -> ID “(”params”)” | ID “(” “)”
 
 params -> exp “,” params | exp
 
-assign -> ID “=” exp
+

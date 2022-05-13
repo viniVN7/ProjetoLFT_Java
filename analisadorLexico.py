@@ -11,7 +11,7 @@ reserved = {
   'return' : 'RETURN',
   'int' : 'INT',
   'boolean' : 'BOOLEAN',
-  'string' : 'STRING',
+  'String' : 'STRING',
   'new' : 'NEW',
   'this' : 'THIS',
   'void' : 'VOID',
@@ -26,7 +26,7 @@ reserved = {
 }
 
 #Definindo Tokens e seus padroes
-tokens = ["PLUS_PLUS","MINUS_MINUS", "PLUS_ASSIGNMENT", "MINUS_ASSIGNMENT", "TIMES_ASSIGNMENT", "DIVIDE_ASSIGNMENT", "MODULE_ASSIGNMENT", "AND_ASSIGNMENT", "EXCLUSIVE_OR_ASSIGNMENT", "INCLUSIVE_OR_ASSIGNMENT", "PLUS","MINUS","TIMES","DIVIDE", "MODULE", "LPAREM", "RPAREM", "ID", "NUMBER", "EQUAL", "ASSIGNMENT", "EXCLUSIVE_OR", "INCLUSIVE_OR", "LOGICAL_AND", "LOGICAL_OR", "AND", "NEGATION", "BOOLEAN_NEGATION", "LESS_OR_EQUAL", "DIFFERENT","GREATER_OR_EQUAL", "LESS_THAN", "GREATER_THAN", "LBRACE", "RBRACE", "COMMA", "SEMICOLON"]  + list(reserved.values()) 
+tokens = ["PLUS_PLUS","MINUS_MINUS", "PLUS_ASSIGNMENT", "MINUS_ASSIGNMENT", "TIMES_ASSIGNMENT", "DIVIDE_ASSIGNMENT", "MODULE_ASSIGNMENT", "AND_ASSIGNMENT", "EXCLUSIVE_OR_ASSIGNMENT", "INCLUSIVE_OR_ASSIGNMENT", "PLUS","MINUS","TIMES","DIVIDE", "MODULE", "LPAREN", "RPAREN", "ID", "NUMBER", "EQUAL", "ASSIGNMENT", "EXCLUSIVE_OR", "INCLUSIVE_OR", "LOGICAL_AND", "LOGICAL_OR", "AND", "NEGATION", "BOOLEAN_NEGATION", "LESS_OR_EQUAL", "DIFFERENT","GREATER_OR_EQUAL", "LESS_THAN", "GREATER_THAN", "LBRACE", "RBRACE", "COMMA", "SEMICOLON"]  + list(reserved.values()) 
 
 #adicionar operadores e (palavras reservadas _já_ok)
 t_PLUS_PLUS = r'\++' 
@@ -46,8 +46,8 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_MODULE = r'%'
 
-t_LPAREM = r'\('
-t_RPAREM = r'\)'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
 
 t_EQUAL = r'=='
 t_ASSIGNMENT = r'='
@@ -107,10 +107,10 @@ def t_ccode_comment(t):
     pass
   
 #Criando analisador Lexico e realizando analise lexica
-lexer = lex.lex()
+#lexer = lex.lex()
 #lexer.input("\"\\n\"") #new
 #lexer.input("&& || > <  >= <= != == = % , ; ^ | ++")
-lexer.input("& && &= -- += -= %= /= *= ^= |= | || ~ !")
+#lexer.input("& && &= -- += -= %= /= *= ^= |= | || ~ !")
 #lexer.input("+-*-/ 5 } {=^++\t+\n+() num4 \"teste \\n teste\"  ") 
-for tok in lexer:
-  print(tok.type, tok.value, tok.lineno, tok.lexpos) 
+#for tok in lexer:
+ # print(tok.type, tok.value, tok.lineno, tok.lexpos) 

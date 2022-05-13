@@ -1,0 +1,665 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    AND_ASSIGNMENT
+    BOOLEAN
+    BOOLEAN_NEGATION
+    BREAK
+    DIFFERENT
+    DIVIDE
+    DIVIDE_ASSIGNMENT
+    ELSE
+    EQUAL
+    EXCLUSIVE_OR
+    EXCLUSIVE_OR_ASSIGNMENT
+    FALSE
+    FOR
+    GREATER_OR_EQUAL
+    GREATER_THAN
+    IF
+    IMPORT
+    INCLUSIVE_OR
+    INCLUSIVE_OR_ASSIGNMENT
+    INSTANCEOF
+    LESS_OR_EQUAL
+    LESS_THAN
+    LOGICAL_AND
+    LOGICAL_OR
+    MINUS
+    MINUS_ASSIGNMENT
+    MINUS_MINUS
+    MODULE
+    MODULE_ASSIGNMENT
+    NEGATION
+    NEW
+    NULL
+    NUMBER
+    PACKAGE
+    PLUS
+    PLUS_ASSIGNMENT
+    PLUS_PLUS
+    RETURN
+    STATIC
+    THIS
+    TIMES
+    TIMES_ASSIGNMENT
+    TRUE
+    VOID
+    WHILE
+
+Grammar
+
+Rule 0     S' -> class
+Rule 1     class -> visibility CLASS ID LBRACE body_class RBRACE
+Rule 2     body_class -> attribute
+Rule 3     body_class -> method
+Rule 4     body_class -> attribute body_class
+Rule 5     body_class -> method body_class
+Rule 6     attribute -> visibility type ID ASSIGNMENT exp SEMICOLON
+Rule 7     attribute -> visibility type ID SEMICOLON
+Rule 8     attribute -> type ID ASSIGNMENT exp SEMICOLON
+Rule 9     attribute -> type ID SEMICOLON
+Rule 10    type -> INT
+Rule 11    type -> ID
+Rule 12    type -> STRING
+Rule 13    method -> signature body
+Rule 14    signature -> ID ID LPAREN sigparams RPAREN
+Rule 15    signature -> ID ID LPAREN RPAREN
+Rule 16    sigparams -> ID ID
+Rule 17    sigparams -> ID ID COMMA sigparams
+Rule 18    body -> LBRACE stms RBRACE
+Rule 19    body -> LBRACE RBRACE
+Rule 20    visibility -> PUBLIC
+Rule 21    stms -> stm
+Rule 22    stms -> stm stms
+Rule 23    stm -> ID
+Rule 24    exp -> <empty>
+Rule 25    call -> ID LPAREN params RPAREN
+Rule 26    call -> ID LPAREN RPAREN
+Rule 27    params -> exp COMMA params
+Rule 28    params -> exp
+
+Terminals, with rules where they appear
+
+AND                  : 
+AND_ASSIGNMENT       : 
+ASSIGNMENT           : 6 8
+BOOLEAN              : 
+BOOLEAN_NEGATION     : 
+BREAK                : 
+CLASS                : 1
+COMMA                : 17 27
+DIFFERENT            : 
+DIVIDE               : 
+DIVIDE_ASSIGNMENT    : 
+ELSE                 : 
+EQUAL                : 
+EXCLUSIVE_OR         : 
+EXCLUSIVE_OR_ASSIGNMENT : 
+FALSE                : 
+FOR                  : 
+GREATER_OR_EQUAL     : 
+GREATER_THAN         : 
+ID                   : 1 6 7 8 9 11 14 14 15 15 16 16 17 17 23 25 26
+IF                   : 
+IMPORT               : 
+INCLUSIVE_OR         : 
+INCLUSIVE_OR_ASSIGNMENT : 
+INSTANCEOF           : 
+INT                  : 10
+LBRACE               : 1 18 19
+LESS_OR_EQUAL        : 
+LESS_THAN            : 
+LOGICAL_AND          : 
+LOGICAL_OR           : 
+LPAREN               : 14 15 25 26
+MINUS                : 
+MINUS_ASSIGNMENT     : 
+MINUS_MINUS          : 
+MODULE               : 
+MODULE_ASSIGNMENT    : 
+NEGATION             : 
+NEW                  : 
+NULL                 : 
+NUMBER               : 
+PACKAGE              : 
+PLUS                 : 
+PLUS_ASSIGNMENT      : 
+PLUS_PLUS            : 
+PUBLIC               : 20
+RBRACE               : 1 18 19
+RETURN               : 
+RPAREN               : 14 15 25 26
+SEMICOLON            : 6 7 8 9
+STATIC               : 
+STRING               : 12
+THIS                 : 
+TIMES                : 
+TIMES_ASSIGNMENT     : 
+TRUE                 : 
+VOID                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+attribute            : 2 4
+body                 : 13
+body_class           : 1 4 5
+call                 : 
+class                : 0
+exp                  : 6 8 27 28
+method               : 3 5
+params               : 25 27
+signature            : 13
+sigparams            : 14 17
+stm                  : 21 22
+stms                 : 18 22
+type                 : 6 7 8 9
+visibility           : 1 6 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . class
+    (1) class -> . visibility CLASS ID LBRACE body_class RBRACE
+    (20) visibility -> . PUBLIC
+
+    PUBLIC          shift and go to state 3
+
+    class                          shift and go to state 1
+    visibility                     shift and go to state 2
+
+state 1
+
+    (0) S' -> class .
+
+
+
+state 2
+
+    (1) class -> visibility . CLASS ID LBRACE body_class RBRACE
+
+    CLASS           shift and go to state 4
+
+
+state 3
+
+    (20) visibility -> PUBLIC .
+
+    CLASS           reduce using rule 20 (visibility -> PUBLIC .)
+    INT             reduce using rule 20 (visibility -> PUBLIC .)
+    ID              reduce using rule 20 (visibility -> PUBLIC .)
+    STRING          reduce using rule 20 (visibility -> PUBLIC .)
+
+
+state 4
+
+    (1) class -> visibility CLASS . ID LBRACE body_class RBRACE
+
+    ID              shift and go to state 5
+
+
+state 5
+
+    (1) class -> visibility CLASS ID . LBRACE body_class RBRACE
+
+    LBRACE          shift and go to state 6
+
+
+state 6
+
+    (1) class -> visibility CLASS ID LBRACE . body_class RBRACE
+    (2) body_class -> . attribute
+    (3) body_class -> . method
+    (4) body_class -> . attribute body_class
+    (5) body_class -> . method body_class
+    (6) attribute -> . visibility type ID ASSIGNMENT exp SEMICOLON
+    (7) attribute -> . visibility type ID SEMICOLON
+    (8) attribute -> . type ID ASSIGNMENT exp SEMICOLON
+    (9) attribute -> . type ID SEMICOLON
+    (13) method -> . signature body
+    (20) visibility -> . PUBLIC
+    (10) type -> . INT
+    (11) type -> . ID
+    (12) type -> . STRING
+    (14) signature -> . ID ID LPAREN sigparams RPAREN
+    (15) signature -> . ID ID LPAREN RPAREN
+
+    PUBLIC          shift and go to state 3
+    INT             shift and go to state 14
+    ID              shift and go to state 8
+    STRING          shift and go to state 15
+
+    visibility                     shift and go to state 7
+    body_class                     shift and go to state 9
+    attribute                      shift and go to state 10
+    method                         shift and go to state 11
+    type                           shift and go to state 12
+    signature                      shift and go to state 13
+
+state 7
+
+    (6) attribute -> visibility . type ID ASSIGNMENT exp SEMICOLON
+    (7) attribute -> visibility . type ID SEMICOLON
+    (10) type -> . INT
+    (11) type -> . ID
+    (12) type -> . STRING
+
+    INT             shift and go to state 14
+    ID              shift and go to state 17
+    STRING          shift and go to state 15
+
+    type                           shift and go to state 16
+
+state 8
+
+    (11) type -> ID .
+    (14) signature -> ID . ID LPAREN sigparams RPAREN
+    (15) signature -> ID . ID LPAREN RPAREN
+
+  ! shift/reduce conflict for ID resolved as shift
+    ID              shift and go to state 18
+
+  ! ID              [ reduce using rule 11 (type -> ID .) ]
+
+
+state 9
+
+    (1) class -> visibility CLASS ID LBRACE body_class . RBRACE
+
+    RBRACE          shift and go to state 19
+
+
+state 10
+
+    (2) body_class -> attribute .
+    (4) body_class -> attribute . body_class
+    (2) body_class -> . attribute
+    (3) body_class -> . method
+    (4) body_class -> . attribute body_class
+    (5) body_class -> . method body_class
+    (6) attribute -> . visibility type ID ASSIGNMENT exp SEMICOLON
+    (7) attribute -> . visibility type ID SEMICOLON
+    (8) attribute -> . type ID ASSIGNMENT exp SEMICOLON
+    (9) attribute -> . type ID SEMICOLON
+    (13) method -> . signature body
+    (20) visibility -> . PUBLIC
+    (10) type -> . INT
+    (11) type -> . ID
+    (12) type -> . STRING
+    (14) signature -> . ID ID LPAREN sigparams RPAREN
+    (15) signature -> . ID ID LPAREN RPAREN
+
+    RBRACE          reduce using rule 2 (body_class -> attribute .)
+    PUBLIC          shift and go to state 3
+    INT             shift and go to state 14
+    ID              shift and go to state 8
+    STRING          shift and go to state 15
+
+    attribute                      shift and go to state 10
+    body_class                     shift and go to state 20
+    method                         shift and go to state 11
+    visibility                     shift and go to state 7
+    type                           shift and go to state 12
+    signature                      shift and go to state 13
+
+state 11
+
+    (3) body_class -> method .
+    (5) body_class -> method . body_class
+    (2) body_class -> . attribute
+    (3) body_class -> . method
+    (4) body_class -> . attribute body_class
+    (5) body_class -> . method body_class
+    (6) attribute -> . visibility type ID ASSIGNMENT exp SEMICOLON
+    (7) attribute -> . visibility type ID SEMICOLON
+    (8) attribute -> . type ID ASSIGNMENT exp SEMICOLON
+    (9) attribute -> . type ID SEMICOLON
+    (13) method -> . signature body
+    (20) visibility -> . PUBLIC
+    (10) type -> . INT
+    (11) type -> . ID
+    (12) type -> . STRING
+    (14) signature -> . ID ID LPAREN sigparams RPAREN
+    (15) signature -> . ID ID LPAREN RPAREN
+
+    RBRACE          reduce using rule 3 (body_class -> method .)
+    PUBLIC          shift and go to state 3
+    INT             shift and go to state 14
+    ID              shift and go to state 8
+    STRING          shift and go to state 15
+
+    method                         shift and go to state 11
+    body_class                     shift and go to state 21
+    attribute                      shift and go to state 10
+    visibility                     shift and go to state 7
+    type                           shift and go to state 12
+    signature                      shift and go to state 13
+
+state 12
+
+    (8) attribute -> type . ID ASSIGNMENT exp SEMICOLON
+    (9) attribute -> type . ID SEMICOLON
+
+    ID              shift and go to state 22
+
+
+state 13
+
+    (13) method -> signature . body
+    (18) body -> . LBRACE stms RBRACE
+    (19) body -> . LBRACE RBRACE
+
+    LBRACE          shift and go to state 24
+
+    body                           shift and go to state 23
+
+state 14
+
+    (10) type -> INT .
+
+    ID              reduce using rule 10 (type -> INT .)
+
+
+state 15
+
+    (12) type -> STRING .
+
+    ID              reduce using rule 12 (type -> STRING .)
+
+
+state 16
+
+    (6) attribute -> visibility type . ID ASSIGNMENT exp SEMICOLON
+    (7) attribute -> visibility type . ID SEMICOLON
+
+    ID              shift and go to state 25
+
+
+state 17
+
+    (11) type -> ID .
+
+    ID              reduce using rule 11 (type -> ID .)
+
+
+state 18
+
+    (14) signature -> ID ID . LPAREN sigparams RPAREN
+    (15) signature -> ID ID . LPAREN RPAREN
+
+    LPAREN          shift and go to state 26
+
+
+state 19
+
+    (1) class -> visibility CLASS ID LBRACE body_class RBRACE .
+
+    $end            reduce using rule 1 (class -> visibility CLASS ID LBRACE body_class RBRACE .)
+
+
+state 20
+
+    (4) body_class -> attribute body_class .
+
+    RBRACE          reduce using rule 4 (body_class -> attribute body_class .)
+
+
+state 21
+
+    (5) body_class -> method body_class .
+
+    RBRACE          reduce using rule 5 (body_class -> method body_class .)
+
+
+state 22
+
+    (8) attribute -> type ID . ASSIGNMENT exp SEMICOLON
+    (9) attribute -> type ID . SEMICOLON
+
+    ASSIGNMENT      shift and go to state 27
+    SEMICOLON       shift and go to state 28
+
+
+state 23
+
+    (13) method -> signature body .
+
+    PUBLIC          reduce using rule 13 (method -> signature body .)
+    INT             reduce using rule 13 (method -> signature body .)
+    ID              reduce using rule 13 (method -> signature body .)
+    STRING          reduce using rule 13 (method -> signature body .)
+    RBRACE          reduce using rule 13 (method -> signature body .)
+
+
+state 24
+
+    (18) body -> LBRACE . stms RBRACE
+    (19) body -> LBRACE . RBRACE
+    (21) stms -> . stm
+    (22) stms -> . stm stms
+    (23) stm -> . ID
+
+    RBRACE          shift and go to state 30
+    ID              shift and go to state 32
+
+    stms                           shift and go to state 29
+    stm                            shift and go to state 31
+
+state 25
+
+    (6) attribute -> visibility type ID . ASSIGNMENT exp SEMICOLON
+    (7) attribute -> visibility type ID . SEMICOLON
+
+    ASSIGNMENT      shift and go to state 33
+    SEMICOLON       shift and go to state 34
+
+
+state 26
+
+    (14) signature -> ID ID LPAREN . sigparams RPAREN
+    (15) signature -> ID ID LPAREN . RPAREN
+    (16) sigparams -> . ID ID
+    (17) sigparams -> . ID ID COMMA sigparams
+
+    RPAREN          shift and go to state 37
+    ID              shift and go to state 35
+
+    sigparams                      shift and go to state 36
+
+state 27
+
+    (8) attribute -> type ID ASSIGNMENT . exp SEMICOLON
+    (24) exp -> .
+
+    SEMICOLON       reduce using rule 24 (exp -> .)
+
+    exp                            shift and go to state 38
+
+state 28
+
+    (9) attribute -> type ID SEMICOLON .
+
+    PUBLIC          reduce using rule 9 (attribute -> type ID SEMICOLON .)
+    INT             reduce using rule 9 (attribute -> type ID SEMICOLON .)
+    ID              reduce using rule 9 (attribute -> type ID SEMICOLON .)
+    STRING          reduce using rule 9 (attribute -> type ID SEMICOLON .)
+    RBRACE          reduce using rule 9 (attribute -> type ID SEMICOLON .)
+
+
+state 29
+
+    (18) body -> LBRACE stms . RBRACE
+
+    RBRACE          shift and go to state 39
+
+
+state 30
+
+    (19) body -> LBRACE RBRACE .
+
+    PUBLIC          reduce using rule 19 (body -> LBRACE RBRACE .)
+    INT             reduce using rule 19 (body -> LBRACE RBRACE .)
+    ID              reduce using rule 19 (body -> LBRACE RBRACE .)
+    STRING          reduce using rule 19 (body -> LBRACE RBRACE .)
+    RBRACE          reduce using rule 19 (body -> LBRACE RBRACE .)
+
+
+state 31
+
+    (21) stms -> stm .
+    (22) stms -> stm . stms
+    (21) stms -> . stm
+    (22) stms -> . stm stms
+    (23) stm -> . ID
+
+    RBRACE          reduce using rule 21 (stms -> stm .)
+    ID              shift and go to state 32
+
+    stm                            shift and go to state 31
+    stms                           shift and go to state 40
+
+state 32
+
+    (23) stm -> ID .
+
+    ID              reduce using rule 23 (stm -> ID .)
+    RBRACE          reduce using rule 23 (stm -> ID .)
+
+
+state 33
+
+    (6) attribute -> visibility type ID ASSIGNMENT . exp SEMICOLON
+    (24) exp -> .
+
+    SEMICOLON       reduce using rule 24 (exp -> .)
+
+    exp                            shift and go to state 41
+
+state 34
+
+    (7) attribute -> visibility type ID SEMICOLON .
+
+    PUBLIC          reduce using rule 7 (attribute -> visibility type ID SEMICOLON .)
+    INT             reduce using rule 7 (attribute -> visibility type ID SEMICOLON .)
+    ID              reduce using rule 7 (attribute -> visibility type ID SEMICOLON .)
+    STRING          reduce using rule 7 (attribute -> visibility type ID SEMICOLON .)
+    RBRACE          reduce using rule 7 (attribute -> visibility type ID SEMICOLON .)
+
+
+state 35
+
+    (16) sigparams -> ID . ID
+    (17) sigparams -> ID . ID COMMA sigparams
+
+    ID              shift and go to state 42
+
+
+state 36
+
+    (14) signature -> ID ID LPAREN sigparams . RPAREN
+
+    RPAREN          shift and go to state 43
+
+
+state 37
+
+    (15) signature -> ID ID LPAREN RPAREN .
+
+    LBRACE          reduce using rule 15 (signature -> ID ID LPAREN RPAREN .)
+
+
+state 38
+
+    (8) attribute -> type ID ASSIGNMENT exp . SEMICOLON
+
+    SEMICOLON       shift and go to state 44
+
+
+state 39
+
+    (18) body -> LBRACE stms RBRACE .
+
+    PUBLIC          reduce using rule 18 (body -> LBRACE stms RBRACE .)
+    INT             reduce using rule 18 (body -> LBRACE stms RBRACE .)
+    ID              reduce using rule 18 (body -> LBRACE stms RBRACE .)
+    STRING          reduce using rule 18 (body -> LBRACE stms RBRACE .)
+    RBRACE          reduce using rule 18 (body -> LBRACE stms RBRACE .)
+
+
+state 40
+
+    (22) stms -> stm stms .
+
+    RBRACE          reduce using rule 22 (stms -> stm stms .)
+
+
+state 41
+
+    (6) attribute -> visibility type ID ASSIGNMENT exp . SEMICOLON
+
+    SEMICOLON       shift and go to state 45
+
+
+state 42
+
+    (16) sigparams -> ID ID .
+    (17) sigparams -> ID ID . COMMA sigparams
+
+    RPAREN          reduce using rule 16 (sigparams -> ID ID .)
+    COMMA           shift and go to state 46
+
+
+state 43
+
+    (14) signature -> ID ID LPAREN sigparams RPAREN .
+
+    LBRACE          reduce using rule 14 (signature -> ID ID LPAREN sigparams RPAREN .)
+
+
+state 44
+
+    (8) attribute -> type ID ASSIGNMENT exp SEMICOLON .
+
+    PUBLIC          reduce using rule 8 (attribute -> type ID ASSIGNMENT exp SEMICOLON .)
+    INT             reduce using rule 8 (attribute -> type ID ASSIGNMENT exp SEMICOLON .)
+    ID              reduce using rule 8 (attribute -> type ID ASSIGNMENT exp SEMICOLON .)
+    STRING          reduce using rule 8 (attribute -> type ID ASSIGNMENT exp SEMICOLON .)
+    RBRACE          reduce using rule 8 (attribute -> type ID ASSIGNMENT exp SEMICOLON .)
+
+
+state 45
+
+    (6) attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .
+
+    PUBLIC          reduce using rule 6 (attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .)
+    INT             reduce using rule 6 (attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .)
+    ID              reduce using rule 6 (attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .)
+    STRING          reduce using rule 6 (attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .)
+    RBRACE          reduce using rule 6 (attribute -> visibility type ID ASSIGNMENT exp SEMICOLON .)
+
+
+state 46
+
+    (17) sigparams -> ID ID COMMA . sigparams
+    (16) sigparams -> . ID ID
+    (17) sigparams -> . ID ID COMMA sigparams
+
+    ID              shift and go to state 35
+
+    sigparams                      shift and go to state 47
+
+state 47
+
+    (17) sigparams -> ID ID COMMA sigparams .
+
+    RPAREN          reduce using rule 17 (sigparams -> ID ID COMMA sigparams .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 8 resolved as shift
