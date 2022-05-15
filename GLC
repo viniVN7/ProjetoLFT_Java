@@ -21,7 +21,7 @@ constant_declaration → visibility STATIC FINAL type ID  “=” exp “;” |
                         visibility FINAL type ID  “=” exp “;” |
                         STATIC FINAL type ID  “=” exp “;”
 
-type → INT | ID | STRING
+type → INT | ID | STRING | BOOLEAN
 
 method → signature body
 
@@ -53,9 +53,16 @@ stm2 → IF “(” exp “)” stm |
          IF “(” exp “)” body ELSE stm2 |
          IF “(” exp “)” body
 
-opt_exp → exp | 
+opt_exp →  exp ";" exp ";" exp 
+           | exp ";" ";" exp
+           | exp ";" exp ";" 
+           | exp ";" ";" 
+           | ";" exp ";" exp 
+           | ";" exp ";" 
+           | ";" ";" exp
+           | ";" ";" 
 
-exp → exp1 “=” exp | exp1 “+=” exp | exp1 “*=” exp | exp1 “/=” exp | exp1 “%=” exp | 
+exp → exp1 “=” exp | exp1 “+=” exp | exp1 “-=” exp | exp1 “*=” exp | exp1 “/=” exp | exp1 “%=” exp | 
  exp1 “&=” exp | exp1 “^=” exp | exp1 “|=” exp | exp1
 
 exp1 → exp1 “||” exp2 | exp2

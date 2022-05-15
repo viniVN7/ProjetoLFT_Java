@@ -3,13 +3,13 @@ from analisadorSintatico import *
 
 lexer = lex.lex();
 
-cl = '''public class Java {
-        
-        int a = 3;
+teste = '''public class Java {
+            int a = 3;
+            public int b;
         }
-     '''
+        '''
 
-lexer.input(cl)
+lexer.input(teste)
 parser = yacc.yacc()
 result = parser.parse(debug=True)
 #Visitor = vis.Visitor()

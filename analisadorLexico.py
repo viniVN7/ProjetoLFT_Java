@@ -20,6 +20,7 @@ reserved = {
   'package' : 'PACKAGE',
   'public' : 'PUBLIC',
   'static' : 'STATIC',
+  'final' : 'FINAL',
   'null' : 'NULL',
   'false' : 'FALSE',
   'true' : 'TRUE',
