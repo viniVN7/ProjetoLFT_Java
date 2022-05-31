@@ -1,10 +1,10 @@
 import ply.yacc as yacc
-from analisadorLexico import *
+from AnalisadorLexico import *
 #import SintaxeAbstrata as sa
 
 def p_class(p):
     '''class : visibility CLASS ID LBRACE body_class RBRACE'''
-
+      # p[0] = Class()
 #body_class 
 def p_body_class(p):
   '''body_class : attribute 
@@ -33,8 +33,8 @@ def p_method(p):
 
 #signature
 def p_signature(p):
-  '''signature : visibility ID ID LPAREN sigparams RPAREN
-             | visibility ID ID LPAREN RPAREN'''
+  '''signature : visibility type ID LPAREN sigparams RPAREN
+             | visibility type ID LPAREN RPAREN'''
     
 #sigParams
 def p_sigparams(p):
@@ -56,6 +56,7 @@ def p_type(p):
         | STRING
         | BOOLEAN
         | ID
+        | VOID
   '''
 
 def p_stms(p):
@@ -72,10 +73,10 @@ def p_stm1(p):
         | IF LBRACE exp RBRACE stm1 ELSE body
         | IF LBRACE exp RBRACE body ELSE body
         | WHILE LBRACE exp RBRACE body 
-        | WHILE LBRACE exp RBRACE stm
+        | WHILE LBRACE exp RBRACE stm1
         | FOR LBRACE opt_exp RBRACE body
-        | FOR LBRACE opt_exp RBRACE stm
-        | RETURN exp ";"
+        | FOR LBRACE opt_exp RBRACE stm1
+        | RETURN exp SEMICOLON
         | exp SEMICOLON '''
 
 # expressão opcional para o for 
@@ -96,7 +97,9 @@ def p_stm2(p):
   '''stm2 : IF LBRACE exp RBRACE stm 
         | IF LBRACE exp RBRACE stm1 ELSE stm2
         | IF LBRACE exp RBRACE body ELSE stm2 
-        | IF LBRACE exp RBRACE body'''
+        | IF LBRACE exp RBRACE body
+        | WHILE LBRACE exp RBRACE stm2
+        | FOR LBRACE opt_exp RBRACE stm2'''
 
 def p_exp(p):
   '''exp : exp1 ASSIGNMENT exp

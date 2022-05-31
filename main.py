@@ -1,11 +1,19 @@
-from analisadorLexico import *
-from analisadorSintatico import *
+from AnalisadorLexico import *
+from AnalisadorSintatico import *
 
 lexer = lex.lex();
 
-teste = '''public class Java {
-            int a = 3;
-            public int b;
+teste = '''
+public class Java {
+  int a = 3;
+  public int b;
+  public int metodo(int a) {
+    return a*2;
+  }
+  public void metodo2(){
+
+  }
+            
         }
         '''
 
