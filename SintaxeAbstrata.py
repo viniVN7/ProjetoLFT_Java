@@ -9,7 +9,7 @@ class Class (metaclass = ABCMeta):
 
 class ClassConrete(metaclass = ABCMeta):
   def __init__ (self, visibility, id, body_class):
-      
+      pass
 #o class deve ser chamado?  
 class Method (metaclass = ABCMeta):
   @abstractmethod
@@ -25,18 +25,29 @@ class MethodConcrete(method):
 
 class Signature (metaclass = ABCMeta):
   @abstractmethod
+  def accept():
+    pass
 
-class SignatureConcrete(Signature)
-
+#class SignatureConcrete(Signature):
+   # def __init__(self):
+    
+ #   def accept():
+  #      return 
  # 
 class BodyClass (metaclass = ABCMeta):
   @abstractmethod
+  def accept():
+      pass
 
 class Attribute (metaclass = ABCMeta):
   @abstractmethod
-  
+  def accept():
+      pass
+
 class Constant (metaclass = ABCMeta):
   @abstractmethod
+  def accept():
+      pass
 
 class SigParams(metaclass=ABCMeta):
     @abstractmethod
@@ -173,12 +184,6 @@ class LESS_OR_EQUALExp(Exp): #DEFINIR NO VISITOR
     def accept(self, visitor):
         return visitor.visitLESS_OR_EQUALExp(self)
 
---LESS_OR_EQUAL
---t_GREATER_OR_EQUAL = r'>='
---t_LESS_THAN = r'<'
---t_GREATER_THAN = r'>'
-t_DIFFERENT = r'!='
-
 class GREATER_OR_EQUALExp(Exp): #DEFINIR NO VISITOR
     def __init__(self, exp1, exp2):
         self.exp1 = exp1
@@ -228,14 +233,6 @@ class plus_assigmetExp(Exp):
         self.exp = exp
     def accept(self, visitor):
         return visitor.visitplus_assigmetExp(self) 
-t_MINUS_ASSIGNMENT = r'-='
-t_TIMES_ASSIGNMENT = r'\*='
-t_DIVIDE_ASSIGNMENT = r'/='
-t_MODULE_ASSIGNMENT = r'%='
-t_AND_ASSIGNMENT = r'&='
-t_EXCLUSIVE_OR_ASSIGNMENT = r'\^='
-t_INCLUSIVE_OR_ASSIGNMENT = r'\|='  
-
       
 '''call'''
 
@@ -247,7 +244,7 @@ class Call(metaclass=ABCMeta):
 class ParamsCall(Call):
   def __init__ (self, id, params):
     self.id = id
-      self.params = params
+    self.params = params
   def accept(self, visitor):
     return visitor.visitParamsCall(self)
 

@@ -11,7 +11,8 @@ public class Java {
     return a*2;
   }
   public void metodo2(){
-
+      if(a=3)
+      b=1;
   }
             
         }
