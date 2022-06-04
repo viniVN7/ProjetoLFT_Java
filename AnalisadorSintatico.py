@@ -77,14 +77,14 @@ def p_stm(p):
        | stm2'''
 
 def p_stm1(p):
-  '''stm1 : IF LBRACE exp RBRACE stm1 ELSE stm1 
-        | IF LBRACE exp RBRACE body ELSE stm1 
-        | IF LBRACE exp RBRACE stm1 ELSE body
-        | IF LBRACE exp RBRACE body ELSE body
-        | WHILE LBRACE exp RBRACE body 
-        | WHILE LBRACE exp RBRACE stm1
-        | FOR LBRACE opt_exp RBRACE body
-        | FOR LBRACE opt_exp RBRACE stm1
+  '''stm1 : IF LPAREN exp RPAREN stm1 ELSE stm1 
+        | IF LPAREN exp RPAREN body ELSE stm1 
+        | IF LPAREN exp RPAREN stm1 ELSE body
+        | IF LPAREN exp RPAREN body ELSE body
+        | WHILE LPAREN exp RPAREN body 
+        | WHILE LPAREN exp RPAREN stm1
+        | FOR LPAREN opt_exp RPAREN body
+        | FOR LPAREN opt_exp RPAREN stm1
         | RETURN exp SEMICOLON
         | exp SEMICOLON '''
 
@@ -103,12 +103,12 @@ def p_opt_exp(p):
 
 
 def p_stm2(p):
-  '''stm2 : IF LBRACE exp RBRACE stm 
-        | IF LBRACE exp RBRACE stm1 ELSE stm2
-        | IF LBRACE exp RBRACE body ELSE stm2 
-        | IF LBRACE exp RBRACE body
-        | WHILE LBRACE exp RBRACE stm2
-        | FOR LBRACE opt_exp RBRACE stm2'''
+  '''stm2 : IF LPAREN exp RPAREN stm 
+        | IF LPAREN exp RPAREN stm1 ELSE stm2
+        | IF LPAREN exp RPAREN body ELSE stm2 
+        | IF LPAREN exp RPAREN body
+        | WHILE LPAREN exp RPAREN stm2
+        | FOR LPAREN opt_exp RPAREN stm2'''
 
 def p_exp(p):
   '''exp : exp1 ASSIGNMENT exp

@@ -71,6 +71,20 @@ class Visitor(AbstractVisitor):
       attributeWithoutVisibility.exp.accept(self)
     print(";")
 
+  def visitConstConcrete(self, constConcrete):
+    if(constConcrete.visibility != None):
+      constConcrete.visibility.accept(self)
+    if(constConcrete.STATIC != None):
+      print('static ', end='', sep='')
+    if(constConcrete.FINAL != None):
+      print('final ', end='', sep='')
+    constConcrete.type.accept(self)
+    constConcrete.id.accept(self)
+    print(' = ', end='', sep='')
+    constConcrete.exp.accept(self)
+    print('; \n', end='', sep='')
+
+      
   def visitTypeInt(self, typeInt):
     print('int ', end = '')
   
@@ -106,6 +120,11 @@ class Visitor(AbstractVisitor):
     print(blank(),sep='',end='')
     stmExp.exp.accept(self)
     print('')
+
+  #def visitStmIF1(self, stm1IF):
+   # print('if', '(', end='', sep='')
+    #stm1IF.exp.accept(self)
+    #print(') \n', end='', sep='')
 
   def visitStmWhile(self, stmWhile):
     print (blank(), 'while (', end='', sep='')
@@ -185,7 +204,7 @@ class Visitor(AbstractVisitor):
 
   def visitAndExp(self, andExp):
     andExp.exp5.accept(self)
-    print(' ^ ', end='')
+    print(' & ', end='')
     andExp.exp6.accept(self)
 
   def visitEqualExp(self, equalExp):
@@ -222,7 +241,12 @@ class Visitor(AbstractVisitor):
     somaExp.exp8.accept(self)
     print(' + ', end='')
     somaExp.exp9.accept(self)
-
+    
+  def visitSubExp(self, somaExp):
+    somaExp.exp8.accept(self)
+    print(' - ', end='')
+    somaExp.exp9.accept(self)
+  
   def visitMulExp(self, mulExp):
     mulExp.exp9.accept(self)
     print(' * ', end='')
