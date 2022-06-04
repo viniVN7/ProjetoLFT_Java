@@ -1,6 +1,7 @@
 from AnalisadorLexico import *
 from AnalisadorSintatico import *
 
+
 lexer = lex.lex();
 
 teste = '''

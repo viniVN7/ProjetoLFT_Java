@@ -1,10 +1,10 @@
 import ply.yacc as yacc
 from AnalisadorLexico import *
-#import SintaxeAbstrata as sa
+import SintaxeAbstrata as sa
 
 def p_class(p):
     '''class : visibility CLASS ID LBRACE body_class RBRACE'''
-      # p[0] = Class()
+    p[0] = sa.Class(p[1], p[3], p[5])
 #body_class 
 def p_body_class(p):
   '''body_class : attribute 
@@ -47,9 +47,14 @@ def p_body(p):
   ''' body : LBRACE stms RBRACE
            | LBRACE RBRACE
   '''
-
+  if (len(p) == 4):
+      p[0] = sa.BodyConcrete(p[2])
+  else:
+      p[0] = sa.BodyConcrete(None)
+    
 def p_visibility(p):
   '''visibility : PUBLIC'''
+  
 
 def p_type(p):
   '''type : INT 
@@ -62,7 +67,11 @@ def p_type(p):
 def p_stms(p):
   '''stms : stm 
         | stm stms'''
-
+  if(len(p) == 2):
+      p[0] = sa.SingleStm(p[1])
+  else:
+    p[0] = sa.CompoundStm(p[1], p[2])
+      
 def p_stm(p):
   '''stm : stm1 
        | stm2'''
